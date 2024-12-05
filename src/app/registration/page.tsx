@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Container, Typography, TextField, Button, Box } from "@mui/material"
+import Link from "next/link"
 
 
 const RegistrationPage = () => {
@@ -109,9 +110,11 @@ const RegistrationPage = () => {
           }}
         />
 
-        <Button variant="contained" type="submit" sx={{ backgroundColor: "#ff6f00" }}>
-          Cadastrar
-        </Button>
+        <Link href="/questions" passHref legacyBehavior>
+          <Button variant="contained" type="submit" sx={{ backgroundColor: "#ff6f00" }}>
+            Cadastrar
+          </Button>
+        </Link>
       </Box>
     </Container>
   )
