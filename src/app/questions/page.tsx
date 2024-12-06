@@ -1,7 +1,21 @@
 "use client";
 
 import { useState } from "react";
-import { Container, Typography, TextField, Button, Box, List, ListItem, ListItemText, IconButton, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Box,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -21,9 +35,14 @@ const QuestionsPage = () => {
   const [newQuestion, setNewQuestion] = useState("");
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [editingAnswerId, setEditingAnswerId] = useState<number | null>(null); // Track answer being edited
-  const [editingQuestionId, setEditingQuestionId] = useState<number | null>(null); // Track question being edited
+  const [editingQuestionId, setEditingQuestionId] = useState<number | null>(
+    null
+  ); // Track question being edited
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false); // State to control the modal visibility
-  const [answerToDelete, setAnswerToDelete] = useState<{ questionId: number, answerId: number } | null>(null); // Track which answer is selected for deletion
+  const [answerToDelete, setAnswerToDelete] = useState<{
+    questionId: number;
+    answerId: number;
+  } | null>(null); // Track which answer is selected for deletion
   const [questionToDelete, setQuestionToDelete] = useState<number | null>(null); // Track which question is selected for deletion
 
   // Adicionar uma nova pergunta
@@ -94,7 +113,7 @@ const QuestionsPage = () => {
             : question
         )
       );
-      setAnswers((prevAnswers) => ({ ...prevAnswers, [questionId]: "" }));
+      setAnswers((prevAnswers) => ({ ...prevAnswers, [questionId]: " " }));
       setEditingAnswerId(null); // Limpar estado de edição
     }
   };
@@ -131,7 +150,9 @@ const QuestionsPage = () => {
           question.id === answerToDelete.questionId
             ? {
                 ...question,
-                answers: question.answers.filter((answer) => answer.id !== answerToDelete.answerId), // Remover a resposta
+                answers: question.answers.filter(
+                  (answer) => answer.id !== answerToDelete.answerId
+                ), // Remover a resposta
               }
             : question
         )
@@ -144,8 +165,9 @@ const QuestionsPage = () => {
   // Apagar uma pergunta
   const handleDeleteQuestion = () => {
     if (questionToDelete !== null) {
-      setQuestions((prevQuestions) =>
-        prevQuestions.filter((question) => question.id !== questionToDelete) // Remover a pergunta e suas respostas
+      setQuestions(
+        (prevQuestions) =>
+          prevQuestions.filter((question) => question.id !== questionToDelete) // Remover a pergunta e suas respostas
       );
       setQuestionToDelete(null); // Limpar estado após exclusão
       setOpenDeleteDialog(false); // Fechar modal
@@ -191,7 +213,6 @@ const QuestionsPage = () => {
             handleAddQuestion();
           }
         }}
-        InputLabelProps={{ style: { color: "#ffffff" } }}
         sx={{
           input: { color: "#ffffff" }, // Garantir que o texto digitado seja branco
           ".MuiOutlinedInput-root": {
@@ -205,6 +226,7 @@ const QuestionsPage = () => {
               borderColor: "#ff6f00", // Cor da borda quando em foco
             },
           },
+          style: { color: "#ffffff" },
           mb: 2,
         }}
       />
@@ -221,7 +243,13 @@ const QuestionsPage = () => {
               mb: 3,
             }}
           >
-            <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+            >
               {/* Pergunta */}
               {editingQuestionId === question.id ? (
                 <TextField
@@ -241,13 +269,20 @@ const QuestionsPage = () => {
                   }}
                 />
               ) : (
-                <ListItemText primary={question.content} sx={{ color: "#ffffff", mb: 1 }} />
+                <ListItemText
+                  primary={question.content}
+                  sx={{ color: "#ffffff", mb: 1 }}
+                />
               )}
-              
+
               {/* Botões Editar e Excluir */}
               <Box sx={{ display: "flex", gap: 1 }}>
                 {editingQuestionId === question.id ? (
-                  <Button variant="contained" onClick={handleConfirmEditQuestion} sx={{ backgroundColor: "#ff6f00" }}>
+                  <Button
+                    variant="contained"
+                    onClick={handleConfirmEditQuestion}
+                    sx={{ backgroundColor: "#ff6f00" }}
+                  >
                     Confirmar
                   </Button>
                 ) : (
@@ -265,14 +300,22 @@ const QuestionsPage = () => {
                 </IconButton>
               </Box>
             </Box>
-
             {/* Respostas */}
             {question.answers.map((answer) => (
-              <Box key={answer.id} sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+              <Box
+                key={answer.id}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+              >
                 {editingAnswerId === answer.id ? (
                   <TextField
                     value={answers[question.id] || ""}
-                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+                    onChange={(e) =>
+                      handleAnswerChange(question.id, e.target.value)
+                    }
                     fullWidth
                     autoFocus
                     variant="outlined"
@@ -287,23 +330,34 @@ const QuestionsPage = () => {
                     }}
                   />
                 ) : (
-                  <Typography sx={{ color: "#ffffff" }}>{answer.content}</Typography>
+                  <Typography sx={{ color: "#ffffff" }}>
+                    {answer.content}
+                  </Typography>
                 )}
 
                 {/* Botões Editar e Excluir Resposta */}
                 <Box sx={{ display: "flex", gap: 1 }}>
                   {editingAnswerId === answer.id ? (
-                    <Button variant="contained" onClick={() => handleConfirmEditAnswer(question.id)} sx={{ backgroundColor: "#ff6f00" }}>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleConfirmEditAnswer(question.id)}
+                      sx={{ backgroundColor: "#ff6f00" }}
+                    >
                       Confirmar
                     </Button>
                   ) : (
-                    <IconButton onClick={() => handleEditAnswer(question.id, answer.id)}>
+                    <IconButton
+                      onClick={() => handleEditAnswer(question.id, answer.id)}
+                    >
                       <EditIcon sx={{ color: "#ff6f00" }} />
                     </IconButton>
                   )}
                   <IconButton
                     onClick={() => {
-                      setAnswerToDelete({ questionId: question.id, answerId: answer.id });
+                      setAnswerToDelete({
+                        questionId: question.id,
+                        answerId: answer.id,
+                      });
                       setOpenDeleteDialog(true);
                     }}
                   >
@@ -312,7 +366,6 @@ const QuestionsPage = () => {
                 </Box>
               </Box>
             ))}
-
             {/* Adicionar Resposta */}
             <TextField
               label="Adicionar Resposta"
@@ -326,14 +379,17 @@ const QuestionsPage = () => {
                   handleAddAnswer(question.id);
                 }
               }}
-              InputLabelProps={{ style: { color: "#ffffff" } }}
               sx={{
                 input: { color: "#ffffff" },
                 ".MuiOutlinedInput-root": {
                   "& fieldset": {
                     borderColor: "#ffffff",
                   },
+                  "&:hover fieldset": {
+                    borderColor: "#ff6f00", // Cor da borda ao passar o mouse
+                  },
                 },
+                style: { color: "#ffffff" },
                 mb: 2,
               }}
             />
@@ -342,16 +398,24 @@ const QuestionsPage = () => {
       </List>
 
       {/* Modal de Confirmação para Apagar */}
-      <Dialog open={openDeleteDialog} onClose={handleCancelDelete} sx={{ color: "#121212" }}>
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleCancelDelete}
+        sx={{ color: "#121212" }}
+      >
         <DialogTitle sx={{ color: "#ff6f00" }}>Confirmar Exclusão</DialogTitle>
         <DialogContent sx={{ color: "#121212" }}>
-          Você tem certeza que deseja apagar? {answerToDelete ? "Esta resposta" : "Esta pergunta e suas respostas"}
+          Você tem certeza que deseja apagar?{" "}
+          {answerToDelete ? "Esta resposta" : "Esta pergunta e suas respostas"}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCancelDelete} color="primary">
             Não
           </Button>
-          <Button onClick={answerToDelete ? handleDeleteAnswer : handleDeleteQuestion} color="error">
+          <Button
+            onClick={answerToDelete ? handleDeleteAnswer : handleDeleteQuestion}
+            color="error"
+          >
             Sim
           </Button>
         </DialogActions>
