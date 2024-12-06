@@ -21,6 +21,8 @@ http://localhost:3000/auth/login
 
 http://localhost:3000/questions
 
+http://localhost:3000/registration
+
 
 
 
