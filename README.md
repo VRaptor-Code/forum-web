@@ -4,7 +4,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+
 ```bash
+# Check if eslint that users prettier has any flaws in terminal
+npm run build
+# After
 npm run dev
 # or
 yarn dev
@@ -14,7 +18,13 @@ pnpm dev
 bun dev
 ```
 
+```bash
+# Run prettier all archives
+npx prettier --write .
+```
+
 # Url importantes
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 http://localhost:3000/auth/login
@@ -22,9 +32,6 @@ http://localhost:3000/auth/login
 http://localhost:3000/questions
 
 http://localhost:3000/registration
-
-
-
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
