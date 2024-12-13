@@ -4,16 +4,18 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
-
 ```bash
+# Install all
+pnpm install
 # Check if eslint that users prettier has any flaws in terminal
-npm run build
+pnpm run build
 # After
+pnpm dev
+
+# or
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 # or
 bun dev
 ```
@@ -29,9 +31,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 http://localhost:3000/auth/login
 
+http://localhost:3000/registration
+
 http://localhost:3000/questions
 
-http://localhost:3000/registration
+http://localhost:3000/topicoList
+
+http://localhost:3000/report
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
